@@ -16,9 +16,9 @@ function start() {
     gl.cullFace(gl.BACK);
     gl.frontFace(gl.CW);
 
-    setInterval(function() {
+    //setInterval(function() {
         display(gl, program, buffer);
-    }, 15);
+    //}, 15);
 }
 
 function display(gl, program, buffer) {
@@ -33,6 +33,10 @@ function display(gl, program, buffer) {
     gl.enableVertexAttribArray(positionLocation);
     gl.vertexAttribPointer(positionLocation, 4, gl.FLOAT, false, 0, 0);
 
+    var colorLocation = gl.getAttribLocation(program, "a_color");
+    gl.enableVertexAttribArray(colorLocation);
+    gl.vertexAttribPointer(colorLocation, 4, gl.FLOAT, false, 0, 288);
+
     timeLocation = gl.getUniformLocation(program, "time");
     gl.uniform1f(timeLocation, time % 1000);
     scaleLocation = gl.getUniformLocation(program, "scale");
@@ -40,5 +44,5 @@ function display(gl, program, buffer) {
 
     time += 15;
 
-    gl.drawArrays(gl.TRIANGLES, 0, 6);
+    gl.drawArrays(gl.TRIANGLES, 0, 36);
 }
