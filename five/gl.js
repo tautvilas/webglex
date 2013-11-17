@@ -37,6 +37,14 @@ function display(gl, program, buffer) {
     gl.enableVertexAttribArray(colorLocation);
     gl.vertexAttribPointer(colorLocation, 4, gl.FLOAT, false, 0, 576);
 
+    var frustumScaleUnif = gl.getUniformLocation(program, "frustumScale");
+    var zNearUnif = gl.getUniformLocation(program, "zNear");
+    var zFarUnif = gl.getUniformLocation(program, "zFar");
+
+    gl.uniform1f(frustumScaleUnif, 1.0);
+    gl.uniform1f(zNearUnif, 0.0);
+    gl.uniform1f(zFarUnif, 3.0);
+
     /*
     timeLocation = gl.getUniformLocation(program, "time");
     gl.uniform1f(timeLocation, time % 1000);

@@ -2,11 +2,21 @@ attribute vec4 a_position;
 attribute vec4 a_color;
 
 varying vec4 theColor;
+uniform float zNear;
+uniform float zFar;
+uniform float frustumScale;
 
 void main() {
-    vec4 camera_pos = a_position + vec4(0.5, 0.5, 0, 0);
-//    camera_pos.w = -a_position.z;
-    gl_Position = camera_pos;
+    vec4 cameraPos = a_position + vec4(0.3, 0.3, 0.0, 0.0);
+    vec4 clipPos;
+
+    clipPos.xy = cameraPos.xy * frustumScale;
+
+    clipPos.z = cameraPos.z * (zNear + zFar) / (zNear - zFar);
+    clipPos.z += 2.0 * zNear * zFar / (zNear - zFar);
+
+    clipPos.w = cameraPos.z;
+    gl_Position = clipPos;
     theColor = a_color;
 }
 
