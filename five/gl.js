@@ -35,12 +35,14 @@ function display(gl, program, buffer) {
 
     var colorLocation = gl.getAttribLocation(program, "a_color");
     gl.enableVertexAttribArray(colorLocation);
-    gl.vertexAttribPointer(colorLocation, 4, gl.FLOAT, false, 0, 288);
+    gl.vertexAttribPointer(colorLocation, 4, gl.FLOAT, false, 0, 576);
 
+    /*
     timeLocation = gl.getUniformLocation(program, "time");
     gl.uniform1f(timeLocation, time % 1000);
     scaleLocation = gl.getUniformLocation(program, "scale");
     gl.uniform1f(scaleLocation, 2);
+    */
 
     time += 15;
 
