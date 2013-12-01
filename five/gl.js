@@ -16,6 +16,8 @@ function start() {
     gl.cullFace(gl.BACK);
     gl.frontFace(gl.CW);
 
+    gl.enable(gl.DEPTH_TEST);
+
     //setInterval(function() {
         display(gl, program, buffer);
     //}, 15);
@@ -42,7 +44,7 @@ function display(gl, program, buffer) {
     var zFarUnif = gl.getUniformLocation(program, "zFar");
 
     gl.uniform1f(frustumScaleUnif, 1.0);
-    gl.uniform1f(zNearUnif, 0.0);
+    gl.uniform1f(zNearUnif, 1.0);
     gl.uniform1f(zFarUnif, 3.0);
 
     /*
