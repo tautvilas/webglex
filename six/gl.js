@@ -18,9 +18,9 @@ function start() {
 
     gl.enable(gl.DEPTH_TEST);
 
-    //setInterval(function() {
+    setInterval(function() {
         display(gl, program, buffer);
-    //}, 15);
+    }, 15);
 }
 
 function display(gl, program, buffer) {
@@ -47,9 +47,9 @@ function display(gl, program, buffer) {
     gl.uniform1f(zNearUnif, 1.0);
     gl.uniform1f(zFarUnif, 3.0);
 
-    /*
     timeLocation = gl.getUniformLocation(program, "time");
-    gl.uniform1f(timeLocation, time % 1000);
+    gl.uniform1f(timeLocation, time);
+    /*
     scaleLocation = gl.getUniformLocation(program, "scale");
     gl.uniform1f(scaleLocation, 2);
     */
