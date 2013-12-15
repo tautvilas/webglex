@@ -48,7 +48,7 @@ function display(gl, program, buffer) {
     gl.uniform1f(zFarUnif, 3.0);
 
     timeLocation = gl.getUniformLocation(program, "time");
-    gl.uniform1f(timeLocation, time);
+    gl.uniform1f(timeLocation, time % 2000);
     /*
     scaleLocation = gl.getUniformLocation(program, "scale");
     gl.uniform1f(scaleLocation, 2);

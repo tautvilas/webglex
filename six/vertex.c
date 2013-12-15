@@ -13,12 +13,13 @@ uniform float frustumScale;
 void main() {
     //float scale = (mod(time, 1000.0)) / 1000.0;
     float scale = 1.0;
-    float angle = 3.14 * (mod(time, 1000.0) / 1000.0);
+    float angle = 6.28 * (time / 2000.0);
     vec4 cameraPos = a_position;
+    float oldy = cameraPos.y;
     cameraPos.y = cameraPos.y * cos(angle) - cameraPos.z * sin(angle);
-    cameraPos.z = cameraPos.y * sin(angle) + cameraPos.z * cos(angle);
+    cameraPos.z = oldy * sin(angle) + cameraPos.z * cos(angle);
 
-    cameraPos = (cameraPos * scale + vec4(1, 1, -3.0, 0.0));
+    cameraPos = (cameraPos * scale + vec4(0.0, 0.0, -2.0, 0.0));
 
     vec4 clipPos;
 
