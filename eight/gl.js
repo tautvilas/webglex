@@ -51,8 +51,15 @@ function display(gl, program, buffer) {
     ]
     gl.uniformMatrix4fv(matrixLocation, false, matrix);
 
-    timeLocation = gl.getUniformLocation(program, "time");
-    gl.uniform1f(timeLocation, time % 2000);
+    var angle = (time % 2000) / 2000 * 6.28;
+    matrixLocation = gl.getUniformLocation(program, "modelToCameraMatrix");
+    var matrix2 = [
+        1, 0, 0, 0,
+        0, Math.cos(angle), Math.sin(angle), 0,
+        0, -Math.sin(angle), Math.cos(angle), 0,
+        0, 0, -2, 1
+    ]
+    gl.uniformMatrix4fv(matrixLocation, false, matrix2);
 
     time += 15;
 
