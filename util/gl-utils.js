@@ -1,3 +1,29 @@
+var mat = {
+    col2row: function(matrix) {
+        var result = [];
+        for (var i = 0; i < 4; i++) {
+            for (var j = 0; j < 4; j++) {
+                result[j * 4 + i] = matrix[i * 4 + j];
+            }
+        }
+        return result;
+    },
+
+    xMat: function(m1, m2) {
+        var result = [];
+        for (var i = 0; i < 4; i++) {
+            for (var j = 0; j < 4; j++) {
+                var ind = i * 4 + j;
+                result[ind] = 0;
+                for (var z = 0; z < 4; z++) {
+                    result[ind] += m1[i * 4 + z] * m2[z * 4 + j];
+                }
+            }
+        }
+        return result;
+    }
+};
+
 var createShader = function(gl, filename, type) {
     var request = new XMLHttpRequest();
     request.open("get", filename, false);

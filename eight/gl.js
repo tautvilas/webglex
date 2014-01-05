@@ -45,21 +45,27 @@ function display(gl, program, buffer) {
     var z2 = (2 * 3 * 1) / (1 - 3);
     var matrix = [
         1, 0, 0, 0,
-        0, 0.5, 0, 0,
-        0, 0, z1, -1,
-        0, 0, z2, 0
+        0, 1, 0, 0,
+        0, 0, z1, z2,
+        0, 0, -1, 0
     ]
-    gl.uniformMatrix4fv(matrixLocation, false, matrix);
+    gl.uniformMatrix4fv(matrixLocation, false, mat.col2row(matrix));
 
     var angle = (time % 2000) / 2000 * 6.28;
     matrixLocation = gl.getUniformLocation(program, "modelToCameraMatrix");
     var matrix2 = [
         1, 0, 0, 0,
-        0, Math.cos(angle), Math.sin(angle), 0,
-        0, -Math.sin(angle), Math.cos(angle), 0,
-        0, 0, -2, 1
+        0, Math.cos(angle), -Math.sin(angle), 0,
+        0, Math.sin(angle), Math.cos(angle), -2,
+        0, 0, 0, 1
     ]
-    gl.uniformMatrix4fv(matrixLocation, false, matrix2);
+    var matrix3 = [
+        Math.cos(angle), -Math.sin(angle), 0, 0,
+        Math.sin(angle), Math.cos(angle), 0, 0,
+        0, 0, 1, 0,
+        0, 0, 0, 1
+    ]
+    gl.uniformMatrix4fv(matrixLocation, false, mat.col2row(mat.xMat(matrix2, matrix3)));
 
     time += 15;
 
