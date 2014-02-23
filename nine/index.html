@@ -2,10 +2,11 @@
 <html>
     <head>
         <title>WebGL demo</title>
+        <link href="style.css" rel="stylesheet" type="text/css">
     </head>
-    <body style="background-color:#ddd" onload="start()">
-        <canvas id="canvas" width="500" height="500" style="background-color:black;border:2px solid #777;float:left"></canvas>
-        <div style="float:left;border: 1px solid black;background-color:white">
+    <body onload="start()">
+        <canvas id="canvas"></canvas>
+        <div id="controls">
             Angle1:
             <input type="range" name="angle1" min="0" max="360" value="0" />
             <br />
