@@ -1,4 +1,6 @@
 var time = 0;
+var angle1 = 0;
+var angle2 = 0;
 
 function start() {
     var canvas = document.getElementById("canvas");
@@ -19,6 +21,8 @@ function start() {
     gl.enable(gl.DEPTH_TEST);
 
     setInterval(function() {
+        angle1 = document.getElementsByName("angle1")[0].value * Math.PI / 180;
+        angle2 = document.getElementsByName("angle2")[0].value * Math.PI / 180;
         display(gl, program, buffer);
     }, 15);
 }
@@ -51,17 +55,16 @@ function display(gl, program, buffer) {
     ]
     gl.uniformMatrix4fv(matrixLocation, false, mat.col2row(matrix));
 
-    var angle = (time % 2000) / 2000 * 6.28;
     matrixLocation = gl.getUniformLocation(program, "modelToCameraMatrix");
     var matrix2 = [
         1, 0, 0, 0,
-        0, Math.cos(angle), -Math.sin(angle), 0,
-        0, Math.sin(angle), Math.cos(angle), -2,
+        0, Math.cos(angle1), -Math.sin(angle1), 0,
+        0, Math.sin(angle1), Math.cos(angle1), -2,
         0, 0, 0, 1
     ]
     var matrix3 = [
-        Math.cos(angle), -Math.sin(angle), 0, 0,
-        Math.sin(angle), Math.cos(angle), 0, 0,
+        Math.cos(angle2), -Math.sin(angle2), 0, 0,
+        Math.sin(angle2), Math.cos(angle2), 0, 0,
         0, 0, 1, 0,
         0, 0, 0, 1
     ]

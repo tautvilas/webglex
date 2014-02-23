@@ -4,7 +4,14 @@
         <title>WebGL demo</title>
     </head>
     <body style="background-color:#ddd" onload="start()">
-        <canvas id="canvas" width="500" height="500" style="background-color:black;border:2px solid #777"></canvas>
+        <canvas id="canvas" width="500" height="500" style="background-color:black;border:2px solid #777;float:left"></canvas>
+        <div style="float:left;border: 1px solid black;background-color:white">
+            Angle1:
+            <input type="range" name="angle1" min="0" max="360" value="0" />
+            <br />
+            Angle2:
+            <input type="range" name="angle2" min="0" max="360" value="0" />
+        </div>
         <script type="text/javascript" src="../util/gl-utils.js"></script>
         <script type="text/javascript" src="../util/primitives/cube.js"></script>
         <script type="text/javascript" src="gl.js"></script>
