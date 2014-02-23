@@ -1,6 +1,7 @@
 var time = 0;
 var angle1 = 0;
 var angle2 = 0;
+var angle3 = 0;
 
 function start() {
     var canvas = document.getElementById("canvas");
@@ -23,6 +24,7 @@ function start() {
     setInterval(function() {
         angle1 = document.getElementsByName("angle1")[0].value * Math.PI / 180;
         angle2 = document.getElementsByName("angle2")[0].value * Math.PI / 180;
+        angle3 = document.getElementsByName("angle3")[0].value * Math.PI / 180;
         display(gl, program, buffer);
     }, 15);
 }
@@ -56,19 +58,38 @@ function display(gl, program, buffer) {
     gl.uniformMatrix4fv(matrixLocation, false, mat.col2row(matrix));
 
     matrixLocation = gl.getUniformLocation(program, "modelToCameraMatrix");
-    var matrix2 = [
+    // x
+    var matrix1 = [
         1, 0, 0, 0,
         0, Math.cos(angle1), -Math.sin(angle1), 0,
-        0, Math.sin(angle1), Math.cos(angle1), -2,
+        0, Math.sin(angle1), Math.cos(angle1), 0,
         0, 0, 0, 1
     ]
+    // y
+    var matrix2 = [
+        Math.cos(angle2), 0, Math.sin(angle2), 0,
+        0, 1, 0, 0,
+        -Math.sin(angle2), 0, Math.cos(angle2), 0,
+        0, 0, 0, 1
+    ]
+    // z
     var matrix3 = [
-        Math.cos(angle2), -Math.sin(angle2), 0, 0,
-        Math.sin(angle2), Math.cos(angle2), 0, 0,
+        Math.cos(angle3), -Math.sin(angle3), 0, 0,
+        Math.sin(angle3), Math.cos(angle3), 0, 0,
         0, 0, 1, 0,
         0, 0, 0, 1
     ]
-    gl.uniformMatrix4fv(matrixLocation, false, mat.col2row(mat.xMat(matrix2, matrix3)));
+    var translation = [
+        1, 0, 0, 0,
+        0, 1, 0, 0,
+        0, 0, 1, -2,
+        0, 0, 0, 1
+    ]
+    var tmpMat = mat.xMat(matrix1, matrix2);
+    var camMat = mat.xMat(tmpMat, matrix3);
+    //console.log(tmpMat);
+    //console.log(camMat);
+    gl.uniformMatrix4fv(matrixLocation, false, mat.col2row(mat.xMat(translation, camMat)));
 
     time += 15;
 
