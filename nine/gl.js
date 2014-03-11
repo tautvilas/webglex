@@ -2,6 +2,7 @@ var time = 0;
 var angle1 = 0;
 var angle2 = 0;
 var angle3 = 0;
+var xtrans = 0;
 
 function start() {
     var canvas = document.getElementById("canvas");
@@ -25,6 +26,7 @@ function start() {
         angle1 = document.getElementsByName("angle1")[0].value * Math.PI / 180;
         angle2 = document.getElementsByName("angle2")[0].value * Math.PI / 180;
         angle3 = document.getElementsByName("angle3")[0].value * Math.PI / 180;
+        xtrans = document.getElementsByName("xtrans")[0].value;
         display(gl, program, buffer);
     }, 15);
 }
@@ -80,16 +82,18 @@ function display(gl, program, buffer) {
         0, 0, 0, 1
     ]
     var translation = [
-        1, 0, 0, 0,
+        1, 0, 0, xtrans,
         0, 1, 0, 0,
         0, 0, 1, -2,
         0, 0, 0, 1
     ]
     var tmpMat = mat.xMat(matrix1, matrix2);
-    var camMat = mat.xMat(tmpMat, matrix3);
+    tmpMat = mat.xMat(tmpMat, matrix3);
+    var camMat = mat.xMat(translation, tmpMat);
+    //var camMat = mat.xMat(tmpMat, translation);
     //console.log(tmpMat);
     //console.log(camMat);
-    gl.uniformMatrix4fv(matrixLocation, false, mat.col2row(mat.xMat(translation, camMat)));
+    gl.uniformMatrix4fv(matrixLocation, false, mat.col2row(camMat));
 
     time += 15;
 
