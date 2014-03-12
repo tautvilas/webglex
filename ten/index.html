@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+    <head>
+        <title>WebGL demo</title>
+        <link href="style.css" rel="stylesheet" type="text/css">
+    </head>
+    <body onload="start()">
+        <h1>Basic flat lightning test</h1>
+        <canvas id="canvas" width="500" height="500"></canvas>
+        <div id="controls">
+            X angle1:
+            <input type="range" name="angle1" min="0" max="360" value="0" />
+            <br />
+            Y angle2:
+            <input type="range" name="angle2" min="0" max="360" value="0" />
+            <br />
+            Z angle3:
+            <input type="range" name="angle3" min="0" max="360" value="0" />
+            <br />
+            X translation:
+            <input type="range" name="xtrans" min="-3" max="3" value="0" />
+        </div>
+        <script type="text/javascript" src="../util/gl-utils.js"></script>
+        <script type="text/javascript" src="../util/primitives/graycube.js"></script>
+        <script type="text/javascript" src="gl.js"></script>
+    </body>
+</html>
