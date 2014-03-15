@@ -1,5 +1,5 @@
 // vertices cordinates & colors of a cube
-var cube = new Float32Array([
+var cube =[
     0.5,  0.5, 0.5, 1.0,
     0.5, -0.5, 0.5, 1.0,
    -0.5,  0.5, 0.5, 1.0,
@@ -95,4 +95,4 @@ var cube = new Float32Array([
     0.5, 0.5, 0.5, 1.0,
     0.5, 0.5, 0.5, 1.0,
     0.5, 0.5, 0.5, 1.0
-]);
+];

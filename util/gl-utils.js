@@ -25,6 +25,9 @@ var mat = {
 };
 
 vec3 = {};
+vec3.sub = function(a, b) {
+    return [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+};
 vec3.dot = function(a, b) {
     return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 };
@@ -40,9 +43,9 @@ vec3.length = function(a) {
 }
 vec3.norm = function(a) {
     var len = vec3.length(a);
-    return [(a[0] / a),
-            (a[1] / a),
-            (a[2] / a)];
+    return [a[0] / len,
+            a[1] / len,
+            a[2] / len];
 }
 
 var createShader = function(gl, filename, type) {

@@ -12,4 +12,9 @@ describe('vec3', function() {
         var cross = vec3.cross([0, 0, -1], [-1, 0, 0]);
         assert.deepEqual([0, 1, 0], cross);
     });
+
+    it('should calculate normal', function() {
+        var cross = vec3.norm([0, 0, -1]);
+        assert.deepEqual([0, 0, -1], cross);
+    });
 });
