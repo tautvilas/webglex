@@ -1,16 +1,10 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: arial
 }
 
 body {
     background-color: #ddd;
-}
-
-h1 {
-    padding: 15px;
-    font-size: 20px;
 }
 
 canvas {
