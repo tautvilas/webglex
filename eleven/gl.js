@@ -1,7 +1,7 @@
 var time = 0;
-var angle1 = 0;
-var angle2 = 0;
-var angle3 = 0;
+var angleX = 0;
+var angleY = 0;
+var angleZ = 0;
 var xtrans = 0;
 
 function start() {
@@ -38,12 +38,32 @@ function start() {
     gl.enable(gl.DEPTH_TEST);
 
     setInterval(function() {
-        angle1 = document.getElementsByName("angle1")[0].value * Math.PI / 180;
-        angle2 = document.getElementsByName("angle2")[0].value * Math.PI / 180;
-        angle3 = document.getElementsByName("angle3")[0].value * Math.PI / 180;
         xtrans = document.getElementsByName("xtrans")[0].value;
         display(gl, program, buffer);
     }, 15);
+
+    document.body.onkeydown = function(e) {
+        switch(e.keyCode) {
+        case 38: // up
+            angleX += 0.1;
+            break;
+        case 40: // down
+            angleX -= 0.1;
+            break;
+        case 37: // left
+            angleY += 0.1;
+            break;
+        case 39: // right
+            angleY -= 0.1;
+            break;
+        case 100: // num left
+            angleZ += 0.1;
+            break;
+        case 102: // num right
+            angleZ -= 0.1;
+            break;
+        }
+    }
 }
 
 function display(gl, program, buffer) {
@@ -88,21 +108,21 @@ function display(gl, program, buffer) {
     // x
     var matrix1 = [
         1, 0, 0, 0,
-        0, Math.cos(angle1), -Math.sin(angle1), 0,
-        0, Math.sin(angle1), Math.cos(angle1), 0,
+        0, Math.cos(angleX), -Math.sin(angleX), 0,
+        0, Math.sin(angleX), Math.cos(angleX), 0,
         0, 0, 0, 1
     ]
     // y
     var matrix2 = [
-        Math.cos(angle2), 0, Math.sin(angle2), 0,
+        Math.cos(angleY), 0, Math.sin(angleY), 0,
         0, 1, 0, 0,
-        -Math.sin(angle2), 0, Math.cos(angle2), 0,
+        -Math.sin(angleY), 0, Math.cos(angleY), 0,
         0, 0, 0, 1
     ]
     // z
     var matrix3 = [
-        Math.cos(angle3), -Math.sin(angle3), 0, 0,
-        Math.sin(angle3), Math.cos(angle3), 0, 0,
+        Math.cos(angleZ), -Math.sin(angleZ), 0, 0,
+        Math.sin(angleZ), Math.cos(angleZ), 0, 0,
         0, 0, 1, 0,
         0, 0, 0, 1
     ]
