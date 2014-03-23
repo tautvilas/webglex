@@ -18,7 +18,6 @@ void main() {
     /*
     vec4 normal = normalize(worldPos);
     */
-    //theColor = a_color * pow(dot(lightDirection, normal), 2.0);
-    theColor = a_color;
+    theColor = a_color * pow(dot(lightDirection, normal), 2.0);
 }
 

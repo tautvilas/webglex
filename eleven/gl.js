@@ -79,6 +79,12 @@ function display(gl, program, buffer) {
     gl.uniformMatrix4fv(matrixLocation, false, mat.col2row(matrix));
 
     matrixLocation = gl.getUniformLocation(program, "modelToCameraMatrix");
+    var scale = [
+        0.5, 0, 0, 0,
+        0, 0.5, 0, 0,
+        0, 0, 1, 0,
+        0, 0, 0, 1
+    ]
     // x
     var matrix1 = [
         1, 0, 0, 0,
@@ -101,7 +107,7 @@ function display(gl, program, buffer) {
         0, 0, 0, 1
     ]
     var translation = [
-        1, 0, 0, xtrans,
+        1, 0, 0, xtrans / 2,
         0, 1, 0, 0,
         0, 0, 1, -2,
         0, 0, 0, 1
@@ -109,6 +115,7 @@ function display(gl, program, buffer) {
     var tmpMat = mat.xMat(matrix1, matrix2);
     tmpMat = mat.xMat(tmpMat, matrix3);
     var camMat = mat.xMat(translation, tmpMat);
+    camMat = mat.xMat(camMat, scale);
     //var camMat = mat.xMat(tmpMat, translation);
     //console.log(tmpMat);
     //console.log(camMat);
@@ -116,5 +123,5 @@ function display(gl, program, buffer) {
 
     time += 15;
 
-    gl.drawArrays(gl.LINE_STRIP, 0, 36);
+    gl.drawArrays(gl.TRIANGLES, 0, 36);
 }
