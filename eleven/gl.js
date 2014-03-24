@@ -3,6 +3,37 @@ var angleX = 0;
 var angleY = 0;
 var angleZ = 0;
 var xtrans = 0;
+var orientation = [
+    1, 0, 0, 0,
+    0, 1, 0, 0,
+    0, 0, 1, 0,
+    0, 0, 0, 1
+]
+
+function rotX(angle) {
+    return [
+        1, 0, 0, 0,
+        0, Math.cos(angle), -Math.sin(angle), 0,
+        0, Math.sin(angle), Math.cos(angle), 0,
+        0, 0, 0, 1
+    ]
+}
+function rotY(angle) {
+    return [
+        Math.cos(angle), 0, Math.sin(angle), 0,
+        0, 1, 0, 0,
+        -Math.sin(angle), 0, Math.cos(angle), 0,
+        0, 0, 0, 1
+    ]
+}
+function rotZ(angle) {
+    return [
+        Math.cos(angle), -Math.sin(angle), 0, 0,
+        Math.sin(angle), Math.cos(angle), 0, 0,
+        0, 0, 1, 0,
+        0, 0, 0, 1
+    ]
+}
 
 function start() {
     var canvas = document.getElementById("canvas");
@@ -45,22 +76,22 @@ function start() {
     document.body.onkeydown = function(e) {
         switch(e.keyCode) {
         case 38: // up
-            angleX += 0.1;
+            orientation = mat.xMat(orientation, rotX(0.1));
             break;
         case 40: // down
-            angleX -= 0.1;
+            orientation = mat.xMat(orientation, rotX(-0.1));
             break;
         case 37: // left
-            angleY += 0.1;
+            orientation = mat.xMat(orientation, rotY(0.1));
             break;
         case 39: // right
-            angleY -= 0.1;
+            orientation = mat.xMat(orientation, rotY(-0.1));
             break;
         case 100: // num left
-            angleZ += 0.1;
+            orientation = mat.xMat(orientation, rotZ(0.1));
             break;
         case 102: // num right
-            angleZ -= 0.1;
+            orientation = mat.xMat(orientation, rotZ(-0.1));
             break;
         }
     }
@@ -105,36 +136,13 @@ function display(gl, program, buffer) {
         0, 0, 1, 0,
         0, 0, 0, 1
     ]
-    // x
-    var matrix1 = [
-        1, 0, 0, 0,
-        0, Math.cos(angleX), -Math.sin(angleX), 0,
-        0, Math.sin(angleX), Math.cos(angleX), 0,
-        0, 0, 0, 1
-    ]
-    // y
-    var matrix2 = [
-        Math.cos(angleY), 0, Math.sin(angleY), 0,
-        0, 1, 0, 0,
-        -Math.sin(angleY), 0, Math.cos(angleY), 0,
-        0, 0, 0, 1
-    ]
-    // z
-    var matrix3 = [
-        Math.cos(angleZ), -Math.sin(angleZ), 0, 0,
-        Math.sin(angleZ), Math.cos(angleZ), 0, 0,
-        0, 0, 1, 0,
-        0, 0, 0, 1
-    ]
     var translation = [
         1, 0, 0, xtrans / 2,
         0, 1, 0, 0,
         0, 0, 1, -2,
         0, 0, 0, 1
     ]
-    var tmpMat = mat.xMat(matrix1, matrix2);
-    tmpMat = mat.xMat(tmpMat, matrix3);
-    var camMat = mat.xMat(translation, tmpMat);
+    var camMat = mat.xMat(translation, orientation);
     camMat = mat.xMat(camMat, scale);
     //var camMat = mat.xMat(tmpMat, translation);
     //console.log(tmpMat);
