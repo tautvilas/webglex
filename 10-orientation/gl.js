@@ -39,8 +39,8 @@ function start() {
     var canvas = document.getElementById("canvas");
     var gl = canvas.getContext("experimental-webgl");
 
-    var vertexShader = createShader(gl, "vertex.c", gl.VERTEX_SHADER);
-    var fragmentShader = createShader(gl, "fragment.c", gl.FRAGMENT_SHADER);
+    var vertexShader = createShader(gl, "vertex.vert", gl.VERTEX_SHADER);
+    var fragmentShader = createShader(gl, "fragment.frag", gl.FRAGMENT_SHADER);
     var program = createProgram(gl, [vertexShader, fragmentShader]);
 
     // calculate normals for triangles
