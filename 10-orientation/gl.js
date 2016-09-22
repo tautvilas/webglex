@@ -87,10 +87,10 @@ function start() {
         case 39: // right
             orientation = mat.xMat(orientation, rotY(-0.1));
             break;
-        case 100: // num left
+        case 90: // z
             orientation = mat.xMat(orientation, rotZ(0.1));
             break;
-        case 102: // num right
+        case 88: // x
             orientation = mat.xMat(orientation, rotZ(-0.1));
             break;
         }
