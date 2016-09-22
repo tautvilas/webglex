@@ -9,6 +9,6 @@
 7. [Cube rotation with matrix](http://tautvilas.github.io/webglex/7-rot-matrix/)
 8. [Interactive cube rotation](http://tautvilas.github.io/webglex/8-rot-interactive/)
 9. [Simple lighting](http://tautvilas.github.io/webglex/9-lighting/)
-10. [Interactive object orientation (arrow keys + zx)](http://tautvilas.github.io/webglex/10-orientation/)
+10. [Interactive object orientation](http://tautvilas.github.io/webglex/10-orientation/)
 
 All the examples above are based on [this amazing book](https://paroj.github.io/gltut/)
