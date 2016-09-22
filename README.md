@@ -11,4 +11,4 @@
 9. [Simple lighting](http://tautvilas.github.io/webglex/9-lighting/)
 10. [Interactive object orientation (arrow keys + zx)](http://tautvilas.github.io/webglex/10-orientation/)
 
-All examples above are based on [this amazing book](https://paroj.github.io/gltut/)
+All the examples above are based on [this amazing book](https://paroj.github.io/gltut/)
