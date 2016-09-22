@@ -8,7 +8,7 @@ var orientation = [
     0, 1, 0, 0,
     0, 0, 1, 0,
     0, 0, 0, 1
-]
+];
 
 function rotX(angle) {
     return [
@@ -16,7 +16,7 @@ function rotX(angle) {
         0, Math.cos(angle), -Math.sin(angle), 0,
         0, Math.sin(angle), Math.cos(angle), 0,
         0, 0, 0, 1
-    ]
+    ];
 }
 function rotY(angle) {
     return [
@@ -24,7 +24,7 @@ function rotY(angle) {
         0, 1, 0, 0,
         -Math.sin(angle), 0, Math.cos(angle), 0,
         0, 0, 0, 1
-    ]
+    ];
 }
 function rotZ(angle) {
     return [
@@ -32,7 +32,7 @@ function rotZ(angle) {
         Math.sin(angle), Math.cos(angle), 0, 0,
         0, 0, 1, 0,
         0, 0, 0, 1
-    ]
+    ];
 }
 
 function start() {
@@ -45,9 +45,9 @@ function start() {
 
     // calculate normals for triangles
     for (var i = 0; i < 12 * 12; i+=12) {
-        var a =  [cube[i], cube[i+1], cube[i+2]]
-        var b =  [cube[i+4], cube[i+5], cube[i+6]]
-        var c =  [cube[i+8], cube[i+9], cube[i+10]]
+        var a =  [cube[i], cube[i+1], cube[i+2]];
+        var b =  [cube[i+4], cube[i+5], cube[i+6]];
+        var c =  [cube[i+8], cube[i+9], cube[i+10]];
         var cross = vec3.cross(vec3.sub(b, a), vec3.sub(c, a));
         var normal = vec3.norm(cross);
         normal.push(1);
@@ -94,7 +94,7 @@ function start() {
             orientation = mat.xMat(orientation, rotZ(-0.1));
             break;
         }
-    }
+    };
 }
 
 function display(gl, program, buffer) {
@@ -126,7 +126,7 @@ function display(gl, program, buffer) {
         0, 1, 0, 0,
         0, 0, z1, z2,
         0, 0, -1, 0
-    ]
+    ];
     gl.uniformMatrix4fv(matrixLocation, false, mat.col2row(matrix));
 
     matrixLocation = gl.getUniformLocation(program, "modelToCameraMatrix");
@@ -135,13 +135,13 @@ function display(gl, program, buffer) {
         0, 0.5, 0, 0,
         0, 0, 1, 0,
         0, 0, 0, 1
-    ]
+    ];
     var translation = [
         1, 0, 0, xtrans / 2,
         0, 1, 0, 0,
         0, 0, 1, -2,
         0, 0, 0, 1
-    ]
+    ];
     var camMat = mat.xMat(translation, orientation);
     camMat = mat.xMat(camMat, scale);
     //var camMat = mat.xMat(tmpMat, translation);

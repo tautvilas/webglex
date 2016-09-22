@@ -36,24 +36,24 @@ vec3.cross = function(a, b) {
         a[1] * b[2] - a[2] * b[1],
         a[2] * b[0] - a[0] * b[2],
         a[0] * b[1] - a[1] * b[0]
-    ]
+    ];
 };
 vec3.length = function(a) {
     return Math.sqrt(a[0] * a[0] + a[1] * a[1] + a[2] * a[2]);
-}
+};
 vec3.norm = function(a) {
     var len = vec3.length(a);
     return [a[0] / len,
             a[1] / len,
             a[2] / len];
-}
+};
 
 var createShader = function(gl, filename, type) {
     var request = new XMLHttpRequest();
     request.open("get", filename, false);
     request.send();
     return loadShader(gl, request.responseText, type);
-}
+};
 
 var loadShader = function(gl, shaderSource, shaderType) {
     var shader = gl.createShader(shaderType);
@@ -67,7 +67,7 @@ var loadShader = function(gl, shaderSource, shaderType) {
         return null;
     }
     return shader;
-}
+};
 
 var error = function(msg) {
     if (window.console) {
@@ -88,7 +88,7 @@ var createProgram = function(gl, shaders, opt_attribs, opt_locations) {
         gl.attachShader(program, shaders[ii]);
     }
     if (opt_attribs) {
-        for (var ii = 0; ii < opt_attribs.length; ++ii) {
+        for (ii = 0; ii < opt_attribs.length; ++ii) {
             gl.bindAttribLocation(
             program,
             opt_locations ? opt_locations[ii] : ii,

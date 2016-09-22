@@ -12,21 +12,6 @@ function start() {
     var fragmentShader = createShader(gl, "fragment.c", gl.FRAGMENT_SHADER);
     var program = createProgram(gl, [vertexShader, fragmentShader]);
 
-    // calculate normals for triangles
-    for (var i = 0; i < 12 * 12; i+=12) {
-        var a =  [cube[i], cube[i+1], cube[i+2]]
-        var b =  [cube[i+4], cube[i+5], cube[i+6]]
-        var c =  [cube[i+8], cube[i+9], cube[i+10]]
-        var cross = vec3.cross(vec3.sub(b, a), vec3.sub(c, a));
-        var normal = vec3.norm(cross);
-        normal.push(1);
-        for (var j = 0; j < 3; j++) {
-            cube.push(normal[0], normal[1], normal[2], normal[3]);
-        }
-    }
-    //console.log(cube);
-    cube = new Float32Array(cube);
-
     var buffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
     gl.bufferData(gl.ARRAY_BUFFER, cube, gl.STATIC_DRAW);
@@ -62,10 +47,6 @@ function display(gl, program, buffer) {
     gl.enableVertexAttribArray(colorLocation);
     gl.vertexAttribPointer(colorLocation, 4, gl.FLOAT, false, 0, 576);
 
-    var normalLocation = gl.getAttribLocation(program, "a_normal");
-    gl.enableVertexAttribArray(normalLocation);
-    gl.vertexAttribPointer(normalLocation, 4, gl.FLOAT, false, 0, 1152);
-
 
     var matrixLocation = gl.getUniformLocation(program, "cameraToClipMatrix");
     var z1 = (3 + 1) / (1 - 3);
@@ -75,7 +56,7 @@ function display(gl, program, buffer) {
         0, 1, 0, 0,
         0, 0, z1, z2,
         0, 0, -1, 0
-    ]
+    ];
     gl.uniformMatrix4fv(matrixLocation, false, mat.col2row(matrix));
 
     matrixLocation = gl.getUniformLocation(program, "modelToCameraMatrix");
@@ -85,27 +66,27 @@ function display(gl, program, buffer) {
         0, Math.cos(angle1), -Math.sin(angle1), 0,
         0, Math.sin(angle1), Math.cos(angle1), 0,
         0, 0, 0, 1
-    ]
+    ];
     // y
     var matrix2 = [
         Math.cos(angle2), 0, Math.sin(angle2), 0,
         0, 1, 0, 0,
         -Math.sin(angle2), 0, Math.cos(angle2), 0,
         0, 0, 0, 1
-    ]
+    ];
     // z
     var matrix3 = [
         Math.cos(angle3), -Math.sin(angle3), 0, 0,
         Math.sin(angle3), Math.cos(angle3), 0, 0,
         0, 0, 1, 0,
         0, 0, 0, 1
-    ]
+    ];
     var translation = [
         1, 0, 0, xtrans,
         0, 1, 0, 0,
         0, 0, 1, -2,
         0, 0, 0, 1
-    ]
+    ];
     var tmpMat = mat.xMat(matrix1, matrix2);
     tmpMat = mat.xMat(tmpMat, matrix3);
     var camMat = mat.xMat(translation, tmpMat);
